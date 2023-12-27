@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laser Energy State Population Calculator</title>
+<link rel="stylesheet" href="population.css">
+
+</head>
+<body>
+
+  
+<div id="energyStateInput">
+  <h2>Laser Energy State Population Calculator</h2>
+  <label for="energyLevel">Energy Level:</label>
+  <input type="number" id="energyLevel" placeholder="Enter the energy level">
+  <select id="energyUnit">
+    <option value="eV">eV</option>
+    <option value="angstrom">Angstrom</option>
+  </select>
+  <br><br><br>
+  <label for="temperature">Temperature (K):</label>
+  <input type="number" id="temperature" placeholder="Enter the temperature in Kelvin">
+  
+  <button onclick="calculateEnergyStatePopulation()">Calculate Energy State Population</button>
+  
+  <div id="result"></div>
+</div>
+
+
+
+<script>
+function calculateEnergyStatePopulation() {
+  let energyLevel = parseFloat(document.getElementById("energyLevel").value);
+  let energyUnit = document.getElementById("energyUnit").value;
+  let temperature = parseFloat(document.getElementById("temperature").value);
+  
+  if (isNaN(energyLevel) || isNaN(temperature)) {
+    document.getElementById("result").textContent = "Please enter valid numerical values.";
+    return;
+  }
+  
+  // Boltzmann constant in eV/K
+  let boltzmannConstant = 8.617333262145e-5;
+  
+  // Convert energy to eV if in Angstrom
+  if (energyUnit === "angstrom") {
+    energyLevel *= 1.60218e-19; // 1 eV = 1.60218e-19 Joules (SI unit)
+  }
+  
+  // Calculate the population using the Boltzmann distribution formula
+  let population = Math.exp(-energyLevel / (boltzmannConstant * temperature));
+  
+  document.getElementById("result").textContent = `Energy State Population: ${population}`;
+}
+</script>
+</body>
+</html>

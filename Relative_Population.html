@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laser Energy State Relative Population Calculator</title>
+<link rel="stylesheet" href="Relative_population.css">
+</head>
+<body>
+<div id="energyStateInput">
+  <h2>Laser Energy State Relative Population Calculator</h2>
+  <label for="energyLevel1">Energy Level 1:</label>
+  <input type="number" id="energyLevel1" placeholder="Enter energy level 1">
+  <select id="energyUnit1">
+    <option value="eV">eV</option>
+    <option value="angstrom">Angstrom</option>
+  </select>
+  
+  <label for="energyLevel2">Energy Level 2:</label>
+  <input type="number" id="energyLevel2" placeholder="Enter energy level 2">
+  <select id="energyUnit2">
+    <option value="eV">eV</option>
+    <option value="angstrom">Angstrom</option>
+  </select>
+  
+  <label for="temperature">Temperature (K):</label>
+  <input type="number" id="temperature" placeholder="Enter the temperature in Kelvin">
+  
+  <button onclick="calculateRelativePopulation()">Calculate Relative Population</button>
+  
+  <div id="result"></div>
+</div>
+
+<script>
+function calculateRelativePopulation() {
+  let energyLevel1 = parseFloat(document.getElementById("energyLevel1").value);
+  let energyUnit1 = document.getElementById("energyUnit1").value;
+  let energyLevel2 = parseFloat(document.getElementById("energyLevel2").value);
+  let energyUnit2 = document.getElementById("energyUnit2").value;
+  let temperature = parseFloat(document.getElementById("temperature").value);
+  
+  if (isNaN(energyLevel1) || isNaN(energyLevel2) || isNaN(temperature)) {
+    document.getElementById("result").textContent = "Please enter valid numerical values.";
+    return;
+  }
+  
+  // Boltzmann constant in eV/K
+  let boltzmannConstant = 8.617333262145e-5;
+  
+  // Conversion factors
+  const angstromToEV = 1.60218e-19; // 1 eV = 1.60218e-19 Joules (SI unit)
+  
+  // Convert energy levels to eV if in Angstrom
+  if (energyUnit1 === "angstrom") {
+    energyLevel1 *= angstromToEV;
+  }
+  
+  if (energyUnit2 === "angstrom") {
+    energyLevel2 *= angstromToEV;
+  }
+  
+  // Calculate relative population using the Boltzmann distribution formula
+  const relativePopulation = Math.exp((energyLevel2 - energyLevel1) / (boltzmannConstant * temperature));
+  
+  document.getElementById("result").textContent = `Relative Population: ${relativePopulation}`;
+}
+</script>
+</body>
+</html>
