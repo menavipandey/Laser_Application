@@ -1,4 +1,3 @@
-# Laser_Application
 
 # Laser Application Static Website
 
