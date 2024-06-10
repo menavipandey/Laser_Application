@@ -35,12 +35,12 @@ To set up the project locally, follow these steps:
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/your-username/laser-application-website.git
+   git clone https://github.com/menavipandey/Laser_Application.git
    ```
 
 2. **Navigate to the project directory:**
    ```sh
-   cd laser-application-website
+   cd laser-application
    ```
 
 3. **Open the index.html file in your web browser:**
